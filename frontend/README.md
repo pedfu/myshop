@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MYSHOP</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">          
+            <LinkContainer to="/cart">
+                <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+            </LinkContainer>
+        </li>
+        <li class="nav-item">
+          <LinkContainer to="/login">
+                <Nav.Link><i className='fas fa-user'></i>Sign In</Nav.Link>
+              </LinkContainer>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<Navbar className='navbar navbar-expand-md' bg="dark" variant="dark" expand="lg" collapseOnSelect>
+        <Container>
+          <LinkContainer to="/">
+            <Navbar.Brand>MyShop</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav ml-auto">
+            <Nav className='mr-auto'>
+              <LinkContainer to="/cart">
+                <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/login">
+                <Nav.Link><i className='fas fa-user'></i>Sign In</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-## Available Scripts
 
-In the project directory, you can run:
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <Container className=''>
+        <div className="container-fluid px-0">
+          <LinkContainer to="/" className='navbar-brand'>
+            <Navbar.Brand>MyShop</Navbar.Brand>
+          </LinkContainer>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">          
+                  <LinkContainer to="/cart">
+                      <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+                  </LinkContainer>
+              </li>
+              <li class="nav-item">
+                <LinkContainer to="/login">
+                      <Nav.Link><i className='fas fa-user'></i>Sign In</Nav.Link>
+                    </LinkContainer>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </Container>
+      </nav>            
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+      <nav className='navbar bg-dark navbar-dark'>
+        <LinkContainer to="/">
+          <h2 className='navbar-brand'>MYSHOP</h2>
+        </LinkContainer>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+        <div className='d-flex'>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className='nav-item'>Teste</li>
+              <li className='nav-item'>Teste</li>
+            </ul>
+          </div>          
+        </div>
+      </nav>
