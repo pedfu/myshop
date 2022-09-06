@@ -1,34 +1,47 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { logout } from '../actions/userActions';
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const selector = useSelector(state => state.userLogin);
+  const {userInfo} = selector;
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
+
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-        <div className="container">
-          <LinkContainer to="/" className='navbar-brand'>
+      <Navbar bg="dark" expand="lg" variant='dark' collapseOnSelect>
+        <Container>
+          <LinkContainer to="/">
             <Navbar.Brand>MyShop</Navbar.Brand>
           </LinkContainer>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <LinkContainer to="/cart" className='nav-link'>
-                  <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
-                </LinkContainer>
-              </li>
-              <li className="nav-item">
-                <LinkContainer to="/login" className='nav-link'>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
+            <Nav className="ml-auto">
+              <LinkContainer to="/cart">
+                <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+              </LinkContainer>
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id='username'>
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to="/login">
                   <Nav.Link><i className='fas fa-user'></i>Sign In</Nav.Link>
                 </LinkContainer>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+              )}              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </header>
   )
 }
