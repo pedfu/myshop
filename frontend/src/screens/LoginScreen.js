@@ -21,8 +21,11 @@ export default function LoginScreen() {
 
     useEffect(() => {
         if(userInfo) {
-            console.log('navigate', redirect);
-            navigate(`/${redirect}`);
+            if(redirect !== '' && redirect !== 'login') {
+                navigate(`${redirect}`);
+            } else {
+                navigate('/');
+            }
         }
     }, [dispatch, redirect, userInfo])
 
