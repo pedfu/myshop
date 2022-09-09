@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { checkPassword, getUserDetails, update } from '../actions/userActions';
+import { listUserOrders } from '../actions/orderActions';
 
 export default function ProfileScreen() {
     const [name, setName] = useState('');
@@ -16,14 +18,17 @@ export default function ProfileScreen() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const selector = useSelector(state => state.userDetails);
-    const { loading, user, error } = selector;
+    const userDetails = useSelector(state => state.userDetails);
+    const { loading, user, error } = userDetails;
 
-    const selector2 = useSelector(state => state.userLogin);
-    const { userInfo } = selector2;
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
 
-    const selector3 = useSelector(state => state.userUpdateProfile);
-    const { success } = selector3;
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile);
+    const { success } = userUpdateProfile;
+
+    const ordersListUser = useSelector(state => state.ordersListUser);
+    const { loading: loadingOrders, orders, error: errorOrders } = ordersListUser;
 
     useEffect(() => {
         if(!userInfo) {
@@ -31,6 +36,7 @@ export default function ProfileScreen() {
         } else {
             if(!user.name) {
                 dispatch(getUserDetails('profile'));
+                dispatch(listUserOrders())
             } else {
                 setName(user.name);
                 setEmail(user.email);
@@ -97,7 +103,6 @@ export default function ProfileScreen() {
                     ></Form.Control>
                 </Form.Group>
 
-                <p>Ideia - pedir senha antiga e senha nova, verificar se ambas sao diferentes e depois verificar se a senha antiga esta correta e mudar a senha</p>
                 <Form.Group controlId='previouspassword' className='pb-3'>
                     <Form.Label>Previous password</Form.Label>
                     <Form.Control 
@@ -119,13 +124,52 @@ export default function ProfileScreen() {
                 </Form.Group>
 
 
-                <Button type='submit' variant='primary' className='pb-3'>
+                <Button type='submit' variant='primary' className='mb-5'>
                     Update
                 </Button>
             </Form>
         </Col>
         <Col md={9}>
             <h2>My Orders</h2>
+            {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> : (
+                <Table striped bordered hover responsive className='table-sm'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>DATE</th>
+                            <th>TOTAL</th>
+                            <th>PAID</th>
+                            <th>DELIVERED</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders ? 
+                        orders.map(order => (
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.createdAt.substring(0,10)}</td>
+                                <td>{order.totalPrice}</td>
+                                <td>{order.isPaid ? (
+                                    order.paidAt.substring(0,10)
+                                ) : (
+                                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                )}</td>
+                                <td>{order.isDelivered ? (
+                                    order.deliveredAt.substring(0,10)
+                                ) : (
+                                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                )}</td>
+                                <td>
+                                    <LinkContainer to={`/order/${order._id}`}>
+                                        <Button className='btn-sm' variant='light'>Details</Button>
+                                    </LinkContainer>
+                                </td>
+                            </tr>
+                        )) : <tr><td><h3>No orders</h3></td></tr>}
+                    </tbody>
+                </Table>
+            )   }
         </Col>
     </Row>
   )

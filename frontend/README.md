@@ -7,3 +7,6 @@
   - reducers: folder with all the reducers
   - constants: folder with constants (action names, for example)
   - actions: folder that change state based on action fired
+
+
+
