@@ -27,7 +27,7 @@ export default function LoginScreen() {
                 navigate('/');
             }
         }
-    }, [dispatch, redirect, userInfo])
+    }, [dispatch, redirect, userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();

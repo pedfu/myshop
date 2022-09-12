@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -14,9 +14,6 @@ export default function UserEditScreen() {
     const [isAdmin, setIsAdmin] = useState(false);
 
     const { id: userId } = useParams();
-
-    const [ searchParams ] = useSearchParams();
-    const redirect = searchParams.get('redirect') ? searchParams.get('redirect') : '/';
 
     const navigate = useNavigate();
     const dispatch = useDispatch();

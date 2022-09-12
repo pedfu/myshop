@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { deleteUser, listUsers, register } from '../actions/userActions';
+import { deleteUser, listUsers } from '../actions/userActions';
 
 
 export default function UserListScreen() {

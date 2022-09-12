@@ -26,7 +26,7 @@ export default function RegisterScreen() {
         if(userInfo) {
             navigate(redirect);
         }
-    }, [dispatch, redirect, userInfo])
+    }, [dispatch, redirect, userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();

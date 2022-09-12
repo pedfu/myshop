@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
+import { Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Rating from '../components/Rating';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ export default function ProductScreen() {
 
     useEffect(() => {
         dispatch(listProductDetails(id));
-    }, [dispatch])
+    }, [dispatch, id])
 
     const addToCartHandler = () => {
         if(product.countInStock > 0) {
