@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import store from '../store';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
@@ -17,6 +19,8 @@ export default function ProductEditScreen() {
     const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState('');
 
+    const [uploading, setUploading] = useState(false);
+
     const { id: productId } = useParams();
 
     const navigate = useNavigate();
@@ -24,6 +28,10 @@ export default function ProductEditScreen() {
 
     const productDetails = useSelector(state => state.productDetails);
     const { loading, product, error } = productDetails;
+
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+
     const productUpdate = useSelector(state => state.productUpdate);
     const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = productUpdate;
 
@@ -49,8 +57,31 @@ export default function ProductEditScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault();   
-        console.log(price);
         dispatch(updateProduct({ _id: productId, name, price, image, brand, category, countInStock, description }));
+    }
+
+    const uploadFileHandler = async(e) => {
+        // 0 because we are only uploading 1 file, but removing it allow us to upload multiples
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${userInfo.token}`
+                },
+            }
+
+            const { data } = await axios.post('/api/upload', formData, config);
+            setImage(data);
+            setUploading(false);
+        } catch (error) {
+            console.error(error);
+            setUploading(false);
+        }
     }
 
   return (
@@ -97,6 +128,13 @@ export default function ProductEditScreen() {
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
                     ></Form.Control>
+                    <Form.Control
+                        type='file'
+                        label='Choose File'
+                        custom='true'
+                        onChange={uploadFileHandler}
+                    />
+                    {uploading && <Loader />}
                 </Form.Group>
                 <Form.Group controlId='brand' className='pb-3'>
                     <Form.Label>Brand</Form.Label>
