@@ -23,7 +23,7 @@ ___
 ___
 ### Links
 
-Demo: [Click Me] (https://myeccshop.herokuapp.com/admin/productlist) <br>
+Demo: [Click Me](https://myeccshop.herokuapp.com/admin/productlist) <br>
 Repo: [Click Me](https://github.com/pedfu/myshop/)<br>
 Linkedin: [Click Me](https://www.linkedin.com/in/pedrofuziwara)
 Email: pedyufuz@gmail.com
