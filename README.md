@@ -7,6 +7,7 @@ ___
 - [Screenshots](#screenshots)
 - [Links](#links)
 - [Tools](#tools)
+- [Getting Started](#getting-started)
 
 ___
 ### Screenshots
@@ -40,5 +41,18 @@ ___
 - Mongoose
 - CSS
 - Boostrap
- 
+
+___
+### Getting Started
+
+- Login in MongoDB Atlas (get mongo uri)
+- Login in Paypal (to get api) 
+
+```
+npm install or yarn
+
+npm run server
+npm run client
+```
+
 
