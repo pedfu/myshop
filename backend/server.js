@@ -8,6 +8,7 @@ import OrderRoutes from './routes/orderRoutes.js';
 import ProductRoutes from './routes/productRoutes.js';
 import UploadRoutes from './routes/uploadRoutes.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+import { allowedNodeEnvironmentFlags } from 'process';
 
 dotenv.config();
 connectDB();
@@ -28,9 +29,16 @@ app.use('/uploads', express.static(path.join(__dirname, 'frontend/public')));
 
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 
-app.get('/', (req, res) => {
-    res.send('Api is running...');
-});
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')));
+} else {
+    app.get('/', (req, res) => {
+        res.send('Api is running...');
+    });
+}
+
 
 app.use(notFound);
 app.use(errorHandler);

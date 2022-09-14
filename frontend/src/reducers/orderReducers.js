@@ -58,7 +58,7 @@ export const orderDeliverReducer = ( state = {}, action ) => {
     }
 }
 
-export const orderListUserReducer = ( state = {}, action ) => {
+export const orderListUserReducer = ( state = { orders: [] }, action ) => {
     switch(action.type) {
         case ORDERS_LIST_USER_REQUEST:
             return { loading: true }

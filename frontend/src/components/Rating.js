@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Rating({ rating, numReviews, color='#f8e825' }) {
+export default function Rating({ rating, numReviews, color='#f8e825', noString=false }) {
   return (
     <div className='rating'>
         <span>
@@ -20,16 +20,18 @@ export default function Rating({ rating, numReviews, color='#f8e825' }) {
             <i style={{color}} className={rating >= 5 ? 'fas fa-star' : rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
         </span>
         
-        <span> 
-            {numReviews}
-            {numReviews > 1 ? ' reviews' : ' review'}
-        </span>
+        {!noString &&
+            <span> 
+                {numReviews}
+                {numReviews > 1 ? ' reviews' : ' review'}
+            </span>
+        }
     </div>
   )
 }
 
 Rating.propTypes = {
     rating: PropTypes.number.isRequired,
-    numReviews: PropTypes.number.isRequired,
+    numReviews: PropTypes.number,
     color: PropTypes.string,
 }
